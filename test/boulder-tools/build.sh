@@ -1,5 +1,6 @@
 #!/bin/bash -ex
 
+sed -i "s/archive.ubuntu.com/mirrors.aliyun.com/g" /etc/apt/sources.list
 apt-get update
 
 # Install system deps
@@ -23,7 +24,7 @@ fi
 curl -L https://github.com/google/protobuf/releases/download/v3.20.1/protoc-3.20.1-linux-"${PROTO_ARCH}".zip -o /tmp/protoc.zip
 unzip /tmp/protoc.zip -d /usr/local/protoc
 
-pip3 install --break-system-packages -r /tmp/requirements.txt
+pip3 install --break-system-packages -i https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple -r /tmp/requirements.txt
 
 apt-get clean -y
 

@@ -6,4 +6,14 @@ if [ "${TARGETPLATFORM}" = linux/arm64 ]; then
   PROTO_ARCH=aarch64
 fi
 
-cargo install typos-cli --target "${PROTO_ARCH}-unknown-linux-gnu"
+mkdir ~/.cargo
+echo '[source.crates-io]
+replace-with="rsproxy-sparse"
+[source.rsproxy-sparse]
+registry="sparse+https://rsproxy.cn/index/"
+[net]
+git-fetch-with-cli=true' > ~/.cargo/config.toml
+
+
+
+cargo install typos-cli --target "${PROTO_ARCH}-unknown-linux-gnu" --config ~/.cargo/config.toml
